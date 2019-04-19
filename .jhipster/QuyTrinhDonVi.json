@@ -1,0 +1,53 @@
+{
+    "name": "QuyTrinhDonVi",
+    "fields": [
+        {
+            "fieldName": "quyTrinhCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "duLieuTienTrinh",
+            "otherEntityRelationshipName": "quyTrinhDonVi",
+            "relationshipName": "duLieuTienTrinh"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "uyQuyenTienTrinh",
+            "otherEntityRelationshipName": "quyTrinhDonVi",
+            "relationshipName": "uyQuyenTienTrinh"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "coQuanHanhChinh",
+            "otherEntityRelationshipName": "quyTrinhDonVi",
+            "relationshipName": "coQuanHanhChinh",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190419074725",
+    "entityTableName": "quy_trinh_don_vi",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "quytrinhdonvi"
+    ],
+    "microserviceName": "quytrinhdonvi",
+    "enableEntityAudit": true
+}

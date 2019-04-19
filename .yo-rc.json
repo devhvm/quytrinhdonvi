@@ -1,0 +1,47 @@
+{
+  "generator-jhipster": {
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": true,
+    "jhiPrefix": "jhi",
+    "languages": [
+      "en",
+      "vi"
+    ],
+    "messageBroker": false,
+    "nativeLanguage": "vi",
+    "packageName": "com.manager.quanlyquytrinh",
+    "packageFolder": "com/manager/quanlyquytrinh",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "serviceDiscoveryType": "eureka",
+    "skipClient": true,
+    "testFrameworks": [],
+    "websocket": false,
+    "baseName": "quytrinhdonvi",
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "buildTool": "maven",
+    "serverPort": "15052",
+    "skipUserManagement": true,
+    "jhipsterVersion": "5.8.2",
+    "clientPackageManager": "npm",
+    "cacheProvider": "hazelcast",
+    "jwtSecretKey": "ZTI4M2ZmOGZhNDBjM2VkZGQ4YjFkNWZmZTdkNGY2ZjA0OWNhMzYyOWY3MWNkMGViZTViMTRlY2QyODU0N2E1MDJmMzhjMWNkZmZlNDQyMzgwYWNmY2RjYTIxMzBiNDIxMjBmZDMxMTQxODQyYWMyNjA1YzkzOGZjY2E0MWI2NjI=",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": []
+  },
+  "entities": [
+    "CoQuanHanhChinh",
+    "QuyTrinhDonVi",
+    "UyQuyenDuLieu",
+    "DuLieuTienTrinh",
+    "UyQuyenTienTrinh"
+  ],
+  "generator-jhipster-entity-audit": {
+    "auditFramework": "custom"
+  }
+}

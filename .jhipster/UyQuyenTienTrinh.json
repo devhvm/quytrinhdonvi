@@ -1,0 +1,55 @@
+{
+    "name": "UyQuyenTienTrinh",
+    "fields": [
+        {
+            "fieldName": "tienTrinhCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fromUserId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "toUserId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "role",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "quyTrinhDonVi",
+            "otherEntityRelationshipName": "uyQuyenTienTrinh",
+            "relationshipName": "quyTrinhDonVi",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190419074728",
+    "entityTableName": "uy_quyen_tien_trinh",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "quytrinhdonvi"
+    ],
+    "microserviceName": "quytrinhdonvi",
+    "enableEntityAudit": true
+}

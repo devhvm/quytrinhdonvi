@@ -1,0 +1,75 @@
+{
+    "name": "DuLieuTienTrinh",
+    "fields": [
+        {
+            "fieldName": "tienTrinhCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "duLieuCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fromUserId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "toUserId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "level",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "note",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "uyQuyenDuLieu",
+            "otherEntityRelationshipName": "quyTrinhDonVi",
+            "relationshipName": "uyQuyenDuLieu"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "quyTrinhDonVi",
+            "otherEntityRelationshipName": "duLieuTienTrinh",
+            "relationshipName": "quyTrinhDonVi",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190419074727",
+    "entityTableName": "du_lieu_tien_trinh",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": [
+        "quytrinhdonvi"
+    ],
+    "microserviceName": "quytrinhdonvi",
+    "enableEntityAudit": true
+}
