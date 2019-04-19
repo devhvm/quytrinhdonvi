@@ -29,7 +29,7 @@
             "otherEntityName": "duLieuTienTrinh",
             "otherEntityRelationshipName": "uyQuyenDuLieu",
             "relationshipName": "duLieuTienTrinh",
-            "otherEntityField": "name"
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190419074726",

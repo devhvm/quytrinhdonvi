@@ -12,7 +12,6 @@ import org.mapstruct.*;
 public interface UyQuyenDuLieuMapper extends EntityMapper<UyQuyenDuLieuDTO, UyQuyenDuLieu> {
 
     @Mapping(source = "duLieuTienTrinh.id", target = "duLieuTienTrinhId")
-    @Mapping(source = "duLieuTienTrinh.name", target = "duLieuTienTrinhName")
     UyQuyenDuLieuDTO toDto(UyQuyenDuLieu uyQuyenDuLieu);
 
     @Mapping(source = "duLieuTienTrinhId", target = "duLieuTienTrinh")

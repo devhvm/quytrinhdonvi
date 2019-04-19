@@ -22,8 +22,6 @@ public class UyQuyenDuLieuDTO implements Serializable {
 
     private Long duLieuTienTrinhId;
 
-    private String duLieuTienTrinhName;
-
     public Long getId() {
         return id;
     }
@@ -64,14 +62,6 @@ public class UyQuyenDuLieuDTO implements Serializable {
         this.duLieuTienTrinhId = duLieuTienTrinhId;
     }
 
-    public String getDuLieuTienTrinhName() {
-        return duLieuTienTrinhName;
-    }
-
-    public void setDuLieuTienTrinhName(String duLieuTienTrinhName) {
-        this.duLieuTienTrinhName = duLieuTienTrinhName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -101,7 +91,6 @@ public class UyQuyenDuLieuDTO implements Serializable {
             ", toUserId='" + getToUserId() + "'" +
             ", role='" + getRole() + "'" +
             ", duLieuTienTrinh=" + getDuLieuTienTrinhId() +
-            ", duLieuTienTrinh='" + getDuLieuTienTrinhName() + "'" +
             "}";
     }
 }
