@@ -48,7 +48,7 @@
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "uyQuyenDuLieu",
-            "otherEntityRelationshipName": "quyTrinhDonVi",
+            "otherEntityRelationshipName": "duLieuTienTrinh",
             "relationshipName": "uyQuyenDuLieu"
         },
         {
@@ -66,10 +66,9 @@
     "service": "serviceClass",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,
-    "clientRootFolder": "",
+    "clientRootFolder": "quytrinhdonvi",
     "applications": [
         "quytrinhdonvi"
     ],
-    "microserviceName": "quytrinhdonvi",
-    "enableEntityAudit": true
+    "microserviceName": "quytrinhdonvi"
 }

@@ -11,11 +11,11 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {DuLieuTienTrinhMapper.class})
 public interface UyQuyenDuLieuMapper extends EntityMapper<UyQuyenDuLieuDTO, UyQuyenDuLieu> {
 
-    @Mapping(source = "quyTrinhDonVi.id", target = "quyTrinhDonViId")
-    @Mapping(source = "quyTrinhDonVi.name", target = "quyTrinhDonViName")
+    @Mapping(source = "duLieuTienTrinh.id", target = "duLieuTienTrinhId")
+    @Mapping(source = "duLieuTienTrinh.name", target = "duLieuTienTrinhName")
     UyQuyenDuLieuDTO toDto(UyQuyenDuLieu uyQuyenDuLieu);
 
-    @Mapping(source = "quyTrinhDonViId", target = "quyTrinhDonVi")
+    @Mapping(source = "duLieuTienTrinhId", target = "duLieuTienTrinh")
     UyQuyenDuLieu toEntity(UyQuyenDuLieuDTO uyQuyenDuLieuDTO);
 
     default UyQuyenDuLieu fromId(Long id) {

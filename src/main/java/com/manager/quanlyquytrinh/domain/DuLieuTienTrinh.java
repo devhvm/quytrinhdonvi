@@ -20,7 +20,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "du_lieu_tien_trinh")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class DuLieuTienTrinh extends AbstractAuditingEntity implements Serializable {
+public class DuLieuTienTrinh implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -52,7 +52,7 @@ public class DuLieuTienTrinh extends AbstractAuditingEntity implements Serializa
     @Column(name = "note", nullable = false)
     private String note;
 
-    @OneToMany(mappedBy = "quyTrinhDonVi")
+    @OneToMany(mappedBy = "duLieuTienTrinh")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<UyQuyenDuLieu> uyQuyenDuLieus = new HashSet<>();
     @ManyToOne
@@ -157,13 +157,13 @@ public class DuLieuTienTrinh extends AbstractAuditingEntity implements Serializa
 
     public DuLieuTienTrinh addUyQuyenDuLieu(UyQuyenDuLieu uyQuyenDuLieu) {
         this.uyQuyenDuLieus.add(uyQuyenDuLieu);
-        uyQuyenDuLieu.setQuyTrinhDonVi(this);
+        uyQuyenDuLieu.setDuLieuTienTrinh(this);
         return this;
     }
 
     public DuLieuTienTrinh removeUyQuyenDuLieu(UyQuyenDuLieu uyQuyenDuLieu) {
         this.uyQuyenDuLieus.remove(uyQuyenDuLieu);
-        uyQuyenDuLieu.setQuyTrinhDonVi(null);
+        uyQuyenDuLieu.setDuLieuTienTrinh(null);
         return this;
     }
 

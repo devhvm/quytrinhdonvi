@@ -17,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "uy_quyen_du_lieu")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class UyQuyenDuLieu extends AbstractAuditingEntity implements Serializable {
+public class UyQuyenDuLieu implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -39,7 +39,7 @@ public class UyQuyenDuLieu extends AbstractAuditingEntity implements Serializabl
 
     @ManyToOne
     @JsonIgnoreProperties("uyQuyenDuLieus")
-    private DuLieuTienTrinh quyTrinhDonVi;
+    private DuLieuTienTrinh duLieuTienTrinh;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -89,17 +89,17 @@ public class UyQuyenDuLieu extends AbstractAuditingEntity implements Serializabl
         this.role = role;
     }
 
-    public DuLieuTienTrinh getQuyTrinhDonVi() {
-        return quyTrinhDonVi;
+    public DuLieuTienTrinh getDuLieuTienTrinh() {
+        return duLieuTienTrinh;
     }
 
-    public UyQuyenDuLieu quyTrinhDonVi(DuLieuTienTrinh duLieuTienTrinh) {
-        this.quyTrinhDonVi = duLieuTienTrinh;
+    public UyQuyenDuLieu duLieuTienTrinh(DuLieuTienTrinh duLieuTienTrinh) {
+        this.duLieuTienTrinh = duLieuTienTrinh;
         return this;
     }
 
-    public void setQuyTrinhDonVi(DuLieuTienTrinh duLieuTienTrinh) {
-        this.quyTrinhDonVi = duLieuTienTrinh;
+    public void setDuLieuTienTrinh(DuLieuTienTrinh duLieuTienTrinh) {
+        this.duLieuTienTrinh = duLieuTienTrinh;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

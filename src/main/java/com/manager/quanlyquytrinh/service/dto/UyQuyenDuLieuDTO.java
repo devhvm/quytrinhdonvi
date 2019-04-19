@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * A DTO for the UyQuyenDuLieu entity.
  */
-public class UyQuyenDuLieuDTO extends AbstractAuditingDTO implements Serializable {
+public class UyQuyenDuLieuDTO implements Serializable {
 
     private Long id;
 
@@ -20,9 +20,9 @@ public class UyQuyenDuLieuDTO extends AbstractAuditingDTO implements Serializabl
     private String role;
 
 
-    private Long quyTrinhDonViId;
+    private Long duLieuTienTrinhId;
 
-    private String quyTrinhDonViName;
+    private String duLieuTienTrinhName;
 
     public Long getId() {
         return id;
@@ -56,20 +56,20 @@ public class UyQuyenDuLieuDTO extends AbstractAuditingDTO implements Serializabl
         this.role = role;
     }
 
-    public Long getQuyTrinhDonViId() {
-        return quyTrinhDonViId;
+    public Long getDuLieuTienTrinhId() {
+        return duLieuTienTrinhId;
     }
 
-    public void setQuyTrinhDonViId(Long duLieuTienTrinhId) {
-        this.quyTrinhDonViId = duLieuTienTrinhId;
+    public void setDuLieuTienTrinhId(Long duLieuTienTrinhId) {
+        this.duLieuTienTrinhId = duLieuTienTrinhId;
     }
 
-    public String getQuyTrinhDonViName() {
-        return quyTrinhDonViName;
+    public String getDuLieuTienTrinhName() {
+        return duLieuTienTrinhName;
     }
 
-    public void setQuyTrinhDonViName(String duLieuTienTrinhName) {
-        this.quyTrinhDonViName = duLieuTienTrinhName;
+    public void setDuLieuTienTrinhName(String duLieuTienTrinhName) {
+        this.duLieuTienTrinhName = duLieuTienTrinhName;
     }
 
     @Override
@@ -100,8 +100,8 @@ public class UyQuyenDuLieuDTO extends AbstractAuditingDTO implements Serializabl
             ", fromUserId='" + getFromUserId() + "'" +
             ", toUserId='" + getToUserId() + "'" +
             ", role='" + getRole() + "'" +
-            ", quyTrinhDonVi=" + getQuyTrinhDonViId() +
-            ", quyTrinhDonVi='" + getQuyTrinhDonViName() + "'" +
+            ", duLieuTienTrinh=" + getDuLieuTienTrinhId() +
+            ", duLieuTienTrinh='" + getDuLieuTienTrinhName() + "'" +
             "}";
     }
 }

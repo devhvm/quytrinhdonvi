@@ -349,11 +349,6 @@
             <artifactId>metrics-core</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
-        <dependency>
-            <groupId>com.codahale.metrics</groupId>
-            <artifactId>metrics-annotation</artifactId>
-            <version>3.0.2</version>
-        </dependency>
     </dependencies>
 
     <build>

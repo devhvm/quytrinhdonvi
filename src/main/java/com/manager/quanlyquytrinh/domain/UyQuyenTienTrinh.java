@@ -17,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "uy_quyen_tien_trinh")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class UyQuyenTienTrinh extends AbstractAuditingEntity implements Serializable {
+public class UyQuyenTienTrinh implements Serializable {
 
     private static final long serialVersionUID = 1L;
     

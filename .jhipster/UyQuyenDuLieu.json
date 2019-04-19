@@ -28,7 +28,7 @@
             "relationshipType": "many-to-one",
             "otherEntityName": "duLieuTienTrinh",
             "otherEntityRelationshipName": "uyQuyenDuLieu",
-            "relationshipName": "quyTrinhDonVi",
+            "relationshipName": "duLieuTienTrinh",
             "otherEntityField": "name"
         }
     ],
@@ -39,10 +39,9 @@
     "service": "serviceClass",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,
-    "clientRootFolder": "",
+    "clientRootFolder": "quytrinhdonvi",
     "applications": [
         "quytrinhdonvi"
     ],
-    "microserviceName": "quytrinhdonvi",
-    "enableEntityAudit": true
+    "microserviceName": "quytrinhdonvi"
 }

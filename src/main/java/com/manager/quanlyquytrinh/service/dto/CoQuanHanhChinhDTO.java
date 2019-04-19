@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * A DTO for the CoQuanHanhChinh entity.
  */
-public class CoQuanHanhChinhDTO extends AbstractAuditingDTO implements Serializable {
+public class CoQuanHanhChinhDTO implements Serializable {
 
     private Long id;
 
