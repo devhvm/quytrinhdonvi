@@ -55,8 +55,8 @@ public class DuLieuTienTrinhResourceIntTest {
     private static final String DEFAULT_TO_USER_ID = "AAAAAAAAAA";
     private static final String UPDATED_TO_USER_ID = "BBBBBBBBBB";
 
-    private static final String DEFAULT_LEVEL = "AAAAAAAAAA";
-    private static final String UPDATED_LEVEL = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_NOTE = "AAAAAAAAAA";
     private static final String UPDATED_NOTE = "BBBBBBBBBB";
@@ -113,7 +113,7 @@ public class DuLieuTienTrinhResourceIntTest {
             .duLieuCode(DEFAULT_DU_LIEU_CODE)
             .fromUserId(DEFAULT_FROM_USER_ID)
             .toUserId(DEFAULT_TO_USER_ID)
-            .level(DEFAULT_LEVEL)
+            .name(DEFAULT_NAME)
             .note(DEFAULT_NOTE);
         return duLieuTienTrinh;
     }
@@ -143,7 +143,7 @@ public class DuLieuTienTrinhResourceIntTest {
         assertThat(testDuLieuTienTrinh.getDuLieuCode()).isEqualTo(DEFAULT_DU_LIEU_CODE);
         assertThat(testDuLieuTienTrinh.getFromUserId()).isEqualTo(DEFAULT_FROM_USER_ID);
         assertThat(testDuLieuTienTrinh.getToUserId()).isEqualTo(DEFAULT_TO_USER_ID);
-        assertThat(testDuLieuTienTrinh.getLevel()).isEqualTo(DEFAULT_LEVEL);
+        assertThat(testDuLieuTienTrinh.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testDuLieuTienTrinh.getNote()).isEqualTo(DEFAULT_NOTE);
     }
 
@@ -245,10 +245,10 @@ public class DuLieuTienTrinhResourceIntTest {
 
     @Test
     @Transactional
-    public void checkLevelIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = duLieuTienTrinhRepository.findAll().size();
         // set the field null
-        duLieuTienTrinh.setLevel(null);
+        duLieuTienTrinh.setName(null);
 
         // Create the DuLieuTienTrinh, which fails.
         DuLieuTienTrinhDTO duLieuTienTrinhDTO = duLieuTienTrinhMapper.toDto(duLieuTienTrinh);
@@ -296,7 +296,7 @@ public class DuLieuTienTrinhResourceIntTest {
             .andExpect(jsonPath("$.[*].duLieuCode").value(hasItem(DEFAULT_DU_LIEU_CODE.toString())))
             .andExpect(jsonPath("$.[*].fromUserId").value(hasItem(DEFAULT_FROM_USER_ID.toString())))
             .andExpect(jsonPath("$.[*].toUserId").value(hasItem(DEFAULT_TO_USER_ID.toString())))
-            .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
     }
     
@@ -315,7 +315,7 @@ public class DuLieuTienTrinhResourceIntTest {
             .andExpect(jsonPath("$.duLieuCode").value(DEFAULT_DU_LIEU_CODE.toString()))
             .andExpect(jsonPath("$.fromUserId").value(DEFAULT_FROM_USER_ID.toString()))
             .andExpect(jsonPath("$.toUserId").value(DEFAULT_TO_USER_ID.toString()))
-            .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL.toString()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()));
     }
 
@@ -344,7 +344,7 @@ public class DuLieuTienTrinhResourceIntTest {
             .duLieuCode(UPDATED_DU_LIEU_CODE)
             .fromUserId(UPDATED_FROM_USER_ID)
             .toUserId(UPDATED_TO_USER_ID)
-            .level(UPDATED_LEVEL)
+            .name(UPDATED_NAME)
             .note(UPDATED_NOTE);
         DuLieuTienTrinhDTO duLieuTienTrinhDTO = duLieuTienTrinhMapper.toDto(updatedDuLieuTienTrinh);
 
@@ -361,7 +361,7 @@ public class DuLieuTienTrinhResourceIntTest {
         assertThat(testDuLieuTienTrinh.getDuLieuCode()).isEqualTo(UPDATED_DU_LIEU_CODE);
         assertThat(testDuLieuTienTrinh.getFromUserId()).isEqualTo(UPDATED_FROM_USER_ID);
         assertThat(testDuLieuTienTrinh.getToUserId()).isEqualTo(UPDATED_TO_USER_ID);
-        assertThat(testDuLieuTienTrinh.getLevel()).isEqualTo(UPDATED_LEVEL);
+        assertThat(testDuLieuTienTrinh.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDuLieuTienTrinh.getNote()).isEqualTo(UPDATED_NOTE);
     }
 

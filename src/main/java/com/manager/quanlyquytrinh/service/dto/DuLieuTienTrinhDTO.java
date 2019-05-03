@@ -23,7 +23,7 @@ public class DuLieuTienTrinhDTO implements Serializable {
     private String toUserId;
 
     @NotNull
-    private String level;
+    private String name;
 
     @NotNull
     private String note;
@@ -73,12 +73,12 @@ public class DuLieuTienTrinhDTO implements Serializable {
         this.toUserId = toUserId;
     }
 
-    public String getLevel() {
-        return level;
+    public String getName() {
+        return name;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNote() {
@@ -134,7 +134,7 @@ public class DuLieuTienTrinhDTO implements Serializable {
             ", duLieuCode='" + getDuLieuCode() + "'" +
             ", fromUserId='" + getFromUserId() + "'" +
             ", toUserId='" + getToUserId() + "'" +
-            ", level='" + getLevel() + "'" +
+            ", name='" + getName() + "'" +
             ", note='" + getNote() + "'" +
             ", quyTrinhDonVi=" + getQuyTrinhDonViId() +
             ", quyTrinhDonVi='" + getQuyTrinhDonViName() + "'" +

@@ -30,7 +30,7 @@
             ]
         },
         {
-            "fieldName": "level",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

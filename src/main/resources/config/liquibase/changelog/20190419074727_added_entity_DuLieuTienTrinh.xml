@@ -38,7 +38,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="jhi_level" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
 
