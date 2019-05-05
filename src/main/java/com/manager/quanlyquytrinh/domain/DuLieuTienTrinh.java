@@ -45,8 +45,12 @@ public class DuLieuTienTrinh implements Serializable {
     private String toUserId;
 
     @NotNull
-    @Column(name = "jhi_level", nullable = false)
-    private String level;
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private String status;
 
     @NotNull
     @Column(name = "note", nullable = false)
@@ -120,17 +124,30 @@ public class DuLieuTienTrinh implements Serializable {
         this.toUserId = toUserId;
     }
 
-    public String getLevel() {
-        return level;
+    public String getName() {
+        return name;
     }
 
-    public DuLieuTienTrinh level(String level) {
-        this.level = level;
+    public DuLieuTienTrinh name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public DuLieuTienTrinh status(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getNote() {
@@ -213,7 +230,8 @@ public class DuLieuTienTrinh implements Serializable {
             ", duLieuCode='" + getDuLieuCode() + "'" +
             ", fromUserId='" + getFromUserId() + "'" +
             ", toUserId='" + getToUserId() + "'" +
-            ", level='" + getLevel() + "'" +
+            ", name='" + getName() + "'" +
+            ", status='" + getStatus() + "'" +
             ", note='" + getNote() + "'" +
             "}";
     }

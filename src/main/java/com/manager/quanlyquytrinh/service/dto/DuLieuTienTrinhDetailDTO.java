@@ -1,12 +1,13 @@
 package com.manager.quanlyquytrinh.service.dto;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * A DTO for the DuLieuTienTrinh entity.
  */
-public class DuLieuTienTrinhDTO implements Serializable {
+public class DuLieuTienTrinhDetailDTO implements Serializable {
 
     private Long id;
 
@@ -125,7 +126,7 @@ public class DuLieuTienTrinhDTO implements Serializable {
             return false;
         }
 
-        DuLieuTienTrinhDTO duLieuTienTrinhDTO = (DuLieuTienTrinhDTO) o;
+        DuLieuTienTrinhDetailDTO duLieuTienTrinhDTO = (DuLieuTienTrinhDetailDTO) o;
         if (duLieuTienTrinhDTO.getId() == null || getId() == null) {
             return false;
         }
