@@ -1,5 +1,6 @@
 package com.manager.quanlyquytrinh.service;
 
+import com.manager.quanlyquytrinh.client.DonViPhatHanhServiceClient;
 import com.manager.quanlyquytrinh.domain.DuLieuTienTrinh;
 import com.manager.quanlyquytrinh.repository.DuLieuTienTrinhRepository;
 import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
@@ -7,6 +8,8 @@ import com.manager.quanlyquytrinh.service.mapper.DuLieuTienTrinhMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,10 @@ import java.util.Optional;
 @Service
 @Transactional
 public class DuLieuTienTrinhService {
+
+    @Autowired
+    @Qualifier("donviphathanh")
+    DonViPhatHanhServiceClient donViPhatHanhServiceClient;
 
     private final Logger log = LoggerFactory.getLogger(DuLieuTienTrinhService.class);
 
@@ -104,5 +111,16 @@ public class DuLieuTienTrinhService {
             }
         );
         return duLieuTienTrinhsDTO;
+    }
+
+    /**
+     * Call API to cap nhat quy trinh.
+     *
+     * @param duLieuTienTrinhDTO the id of the entity
+     * @return the entity
+     */
+    public DuLieuTienTrinhDTO capNhatQuyTrinh(DuLieuTienTrinhDTO duLieuTienTrinhDTO) {
+        log.debug("Call API to cap nhat quy trinh : {}", duLieuTienTrinhDTO);
+        return donViPhatHanhServiceClient.capNhatQuyTrinh(duLieuTienTrinhDTO.getDuLieuCode(), duLieuTienTrinhDTO);
     }
 }

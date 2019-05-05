@@ -6,6 +6,7 @@ import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDetailDTO;
 import com.manager.quanlyquytrinh.service.dto.QuyTrinhDonViDTO;
 import com.manager.quanlyquytrinh.service.dto.quanlyquytrinh.QuyTrinhDetailDTO;
 import com.manager.quanlyquytrinh.web.rest.errors.BadRequestAlertException;
+import com.manager.quanlyquytrinh.web.rest.errors.InternalServerErrorException;
 import com.manager.quanlyquytrinh.web.rest.util.HeaderUtil;
 import com.manager.quanlyquytrinh.web.rest.util.PaginationUtil;
 import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
@@ -59,6 +60,10 @@ public class DuLieuTienTrinhResource {
         if (duLieuTienTrinhDTO.getId() != null) {
             throw new BadRequestAlertException("A new duLieuTienTrinh cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (duLieuTienTrinhService.capNhatQuyTrinh(duLieuTienTrinhDTO) == null)
+            throw new InternalServerErrorException("tạo quy trình không thành công");
+
         DuLieuTienTrinhDTO result = duLieuTienTrinhService.save(duLieuTienTrinhDTO);
         return ResponseEntity.created(new URI("/api/du-lieu-tien-trinhs/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -80,6 +85,10 @@ public class DuLieuTienTrinhResource {
         if (duLieuTienTrinhDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        if (duLieuTienTrinhService.capNhatQuyTrinh(duLieuTienTrinhDTO) == null)
+            throw new InternalServerErrorException("cập nhật quy trình không thành công");
+
         DuLieuTienTrinhDTO result = duLieuTienTrinhService.save(duLieuTienTrinhDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, duLieuTienTrinhDTO.getId().toString()))

@@ -153,3 +153,5 @@ jhipster:
 snv:
     gateway:
         quanlyquytrinh: http://vtools.xyz:9999/quanlyquytrinh
+        donviphathanh: http://vtools.xyz:9999/donviphathanh
+

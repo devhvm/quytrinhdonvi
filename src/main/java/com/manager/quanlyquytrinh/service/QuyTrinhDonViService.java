@@ -1,7 +1,6 @@
 package com.manager.quanlyquytrinh.service;
 
 import com.manager.quanlyquytrinh.client.QuanLyQuyTrinhServiceClient;
-import com.manager.quanlyquytrinh.domain.DuLieuTienTrinh;
 import com.manager.quanlyquytrinh.domain.QuyTrinhDonVi;
 import com.manager.quanlyquytrinh.repository.QuyTrinhDonViRepository;
 import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
