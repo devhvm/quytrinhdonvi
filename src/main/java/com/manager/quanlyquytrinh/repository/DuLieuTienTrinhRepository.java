@@ -17,5 +17,5 @@ import java.util.Optional;
 @Repository
 public interface DuLieuTienTrinhRepository extends JpaRepository<DuLieuTienTrinh, Long> {
 
-    Optional<DuLieuTienTrinh> findByTienTrinhCodeAndQuyTrinhDonVi_Id(String tienTrinhCode, Long quyTrinhDonViId);
+    List<DuLieuTienTrinh> findByTienTrinhCodeAndQuyTrinhDonVi_Id(String tienTrinhCode, Long quyTrinhDonViId);
 }

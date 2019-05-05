@@ -14,7 +14,7 @@ public class TienTrinhDetailDTO implements Serializable {
 
     private List<TienTrinhDTO> tienTrinhKetThucs;
 
-    private DuLieuTienTrinhDTO duLieuTienTrinh;
+    private List<DuLieuTienTrinhDTO> duLieuTienTrinh;
 
     public TienTrinhDTO getTienTrinhBatDau() {
         return tienTrinhBatDau;
@@ -32,11 +32,11 @@ public class TienTrinhDetailDTO implements Serializable {
         this.tienTrinhKetThucs = tienTrinhKetThucs;
     }
 
-    public DuLieuTienTrinhDTO getDuLieuTienTrinh() {
+    public List<DuLieuTienTrinhDTO> getDuLieuTienTrinh() {
         return duLieuTienTrinh;
     }
 
-    public void setDuLieuTienTrinh(DuLieuTienTrinhDTO duLieuTienTrinh) {
+    public void setDuLieuTienTrinh(List<DuLieuTienTrinhDTO> duLieuTienTrinh) {
         this.duLieuTienTrinh = duLieuTienTrinh;
     }
 }

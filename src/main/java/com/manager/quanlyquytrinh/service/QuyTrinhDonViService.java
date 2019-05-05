@@ -114,9 +114,9 @@ public class QuyTrinhDonViService {
         List<TienTrinhDetailDTO> tienTrinhDetailDTOList = quyTrinhDetailDTO.getTienTrinhXuLys();
         tienTrinhDetailDTOList.forEach(
             tienTrinhDetailDTO -> {
-                Optional<DuLieuTienTrinhDTO> duLieuTienTrinhDTO = duLieuTienTrinhService.findByTienTrinhCodeAndQuyTrinhDonVi_Id(
+                List<DuLieuTienTrinhDTO> duLieuTienTrinhDTOList = duLieuTienTrinhService.findByTienTrinhCodeAndQuyTrinhDonVi_Id(
                     quyTrinhDonViDTO.get().getId(), tienTrinhDetailDTO.getTienTrinhBatDau().getTienTrinhCode());
-                if (duLieuTienTrinhDTO.isPresent()) tienTrinhDetailDTO.setDuLieuTienTrinh(duLieuTienTrinhDTO.get());
+                if (duLieuTienTrinhDTOList != null) tienTrinhDetailDTO.setDuLieuTienTrinh(duLieuTienTrinhDTOList);
             }
         );
         return quyTrinhDetailDTO;
@@ -140,9 +140,9 @@ public class QuyTrinhDonViService {
                 tienTrinhDetail -> tienTrinhDetail.getTienTrinhBatDau().getTienTrinhCode().equals(tienTrinhCode)
             ).findFirst().get();
 
-        Optional<DuLieuTienTrinhDTO> duLieuTienTrinhDTO =
+        List<DuLieuTienTrinhDTO> duLieuTienTrinhDTOList =
             duLieuTienTrinhService.findByTienTrinhCodeAndQuyTrinhDonVi_Id(quyTrinhDonViId, tienTrinhCode);
-        if (duLieuTienTrinhDTO.isPresent()) tienTrinhDetailDTO.setDuLieuTienTrinh(duLieuTienTrinhDTO.get());
+        if (duLieuTienTrinhDTOList != null) tienTrinhDetailDTO.setDuLieuTienTrinh(duLieuTienTrinhDTOList);
 
         tienTrinhDetailDTOList.add(tienTrinhDetailDTO);
         quyTrinhDetailDTO.setTienTrinhXuLys(tienTrinhDetailDTOList);

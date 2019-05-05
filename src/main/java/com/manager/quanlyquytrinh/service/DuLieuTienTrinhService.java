@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -89,9 +91,18 @@ public class DuLieuTienTrinhService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Optional<DuLieuTienTrinhDTO> findByTienTrinhCodeAndQuyTrinhDonVi_Id(Long quyTrinhDonViId, String tienTrinhCode) {
+    public List<DuLieuTienTrinhDTO> findByTienTrinhCodeAndQuyTrinhDonVi_Id(Long quyTrinhDonViId, String tienTrinhCode) {
         log.debug("Request to get DuLieuTienTrinh : {}", quyTrinhDonViId, tienTrinhCode);
-        return duLieuTienTrinhRepository.findByTienTrinhCodeAndQuyTrinhDonVi_Id(tienTrinhCode, quyTrinhDonViId)
-            .map(duLieuTienTrinhMapper::toDto);
+        List<DuLieuTienTrinh> duLieuTienTrinhs = duLieuTienTrinhRepository.findByTienTrinhCodeAndQuyTrinhDonVi_Id(tienTrinhCode, quyTrinhDonViId);
+        List<DuLieuTienTrinhDTO> duLieuTienTrinhsDTO = new ArrayList<>();
+        duLieuTienTrinhs.forEach(
+            duLieuTienTrinh -> {
+                DuLieuTienTrinhDTO duLieuTienTrinhDTO = duLieuTienTrinhMapper.toDto(duLieuTienTrinh);
+                List<DuLieuTienTrinhDTO> duLieuTienTrinhElements = new ArrayList<>();
+                duLieuTienTrinhElements.add(duLieuTienTrinhDTO);
+                duLieuTienTrinhsDTO.addAll(duLieuTienTrinhElements);
+            }
+        );
+        return duLieuTienTrinhsDTO;
     }
 }
