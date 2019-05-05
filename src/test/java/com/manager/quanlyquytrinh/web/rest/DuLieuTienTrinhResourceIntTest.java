@@ -5,6 +5,7 @@ import com.manager.quanlyquytrinh.QuytrinhdonviApp;
 import com.manager.quanlyquytrinh.domain.DuLieuTienTrinh;
 import com.manager.quanlyquytrinh.repository.DuLieuTienTrinhRepository;
 import com.manager.quanlyquytrinh.service.DuLieuTienTrinhService;
+import com.manager.quanlyquytrinh.service.QuyTrinhDonViService;
 import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
 import com.manager.quanlyquytrinh.service.mapper.DuLieuTienTrinhMapper;
 import com.manager.quanlyquytrinh.web.rest.errors.ExceptionTranslator;
@@ -71,6 +72,9 @@ public class DuLieuTienTrinhResourceIntTest {
     private DuLieuTienTrinhService duLieuTienTrinhService;
 
     @Autowired
+    private QuyTrinhDonViService quyTrinhDonViService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -92,7 +96,7 @@ public class DuLieuTienTrinhResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DuLieuTienTrinhResource duLieuTienTrinhResource = new DuLieuTienTrinhResource(duLieuTienTrinhService);
+        final DuLieuTienTrinhResource duLieuTienTrinhResource = new DuLieuTienTrinhResource(duLieuTienTrinhService, quyTrinhDonViService);
         this.restDuLieuTienTrinhMockMvc = MockMvcBuilders.standaloneSetup(duLieuTienTrinhResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

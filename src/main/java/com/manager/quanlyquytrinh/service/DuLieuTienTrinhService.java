@@ -81,4 +81,17 @@ public class DuLieuTienTrinhService {
         log.debug("Request to delete DuLieuTienTrinh : {}", id);
         duLieuTienTrinhRepository.deleteById(id);
     }
+
+    /**
+     * Get one duLieuTienTrinh by id.
+     *
+     * @param quyTrinhDonViId, tienTrinhCode the id of the entity
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public Optional<DuLieuTienTrinhDTO> findByTienTrinhCodeAndQuyTrinhDonVi_Id(Long quyTrinhDonViId, String tienTrinhCode) {
+        log.debug("Request to get DuLieuTienTrinh : {}", quyTrinhDonViId, tienTrinhCode);
+        return duLieuTienTrinhRepository.findByTienTrinhCodeAndQuyTrinhDonVi_Id(tienTrinhCode, quyTrinhDonViId)
+            .map(duLieuTienTrinhMapper::toDto);
+    }
 }

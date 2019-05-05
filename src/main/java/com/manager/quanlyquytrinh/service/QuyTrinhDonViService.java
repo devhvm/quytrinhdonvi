@@ -1,17 +1,26 @@
 package com.manager.quanlyquytrinh.service;
 
+import com.manager.quanlyquytrinh.client.QuanLyQuyTrinhServiceClient;
+import com.manager.quanlyquytrinh.domain.DuLieuTienTrinh;
 import com.manager.quanlyquytrinh.domain.QuyTrinhDonVi;
 import com.manager.quanlyquytrinh.repository.QuyTrinhDonViRepository;
+import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
 import com.manager.quanlyquytrinh.service.dto.QuyTrinhDonViDTO;
+import com.manager.quanlyquytrinh.service.dto.quanlyquytrinh.QuyTrinhDetailDTO;
+import com.manager.quanlyquytrinh.service.dto.quanlyquytrinh.TienTrinhDetailDTO;
 import com.manager.quanlyquytrinh.service.mapper.QuyTrinhDonViMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,9 +36,16 @@ public class QuyTrinhDonViService {
 
     private final QuyTrinhDonViMapper quyTrinhDonViMapper;
 
-    public QuyTrinhDonViService(QuyTrinhDonViRepository quyTrinhDonViRepository, QuyTrinhDonViMapper quyTrinhDonViMapper) {
+    private final DuLieuTienTrinhService duLieuTienTrinhService;
+
+    @Autowired
+    @Qualifier("quanlyquytrinh")
+    QuanLyQuyTrinhServiceClient quanLyQuyTrinhServiceClient;
+
+    public QuyTrinhDonViService(QuyTrinhDonViRepository quyTrinhDonViRepository, QuyTrinhDonViMapper quyTrinhDonViMapper, DuLieuTienTrinhService duLieuTienTrinhService) {
         this.quyTrinhDonViRepository = quyTrinhDonViRepository;
         this.quyTrinhDonViMapper = quyTrinhDonViMapper;
+        this.duLieuTienTrinhService = duLieuTienTrinhService;
     }
 
     /**
@@ -80,5 +96,58 @@ public class QuyTrinhDonViService {
     public void delete(Long id) {
         log.debug("Request to delete QuyTrinhDonVi : {}", id);
         quyTrinhDonViRepository.deleteById(id);
+    }
+
+    /**
+     * Get one quyTrinhDonVi by coQuanHanhChinhCode.
+     *
+     * @param coQuanHanhChinhCode the coQuanHanhChinhCode of the entity
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public QuyTrinhDetailDTO findByCoQuanHanhChinh_CoQuanHanhChinhCode(String coQuanHanhChinhCode) {
+        log.debug("Request to get QuyTrinhDonVi : {}", coQuanHanhChinhCode);
+        Optional<QuyTrinhDonViDTO> quyTrinhDonViDTO = quyTrinhDonViRepository.
+            findByCoQuanHanhChinh_CoQuanHanhChinhCode(coQuanHanhChinhCode).map(quyTrinhDonViMapper::toDto);
+
+        QuyTrinhDetailDTO quyTrinhDetailDTO = quanLyQuyTrinhServiceClient.getQuyTrinhsDetail(quyTrinhDonViDTO.get().getId());
+        List<TienTrinhDetailDTO> tienTrinhDetailDTOList = quyTrinhDetailDTO.getTienTrinhXuLys();
+        tienTrinhDetailDTOList.forEach(
+            tienTrinhDetailDTO -> {
+                Optional<DuLieuTienTrinhDTO> duLieuTienTrinhDTO = duLieuTienTrinhService.findByTienTrinhCodeAndQuyTrinhDonVi_Id(
+                    quyTrinhDonViDTO.get().getId(), tienTrinhDetailDTO.getTienTrinhBatDau().getTienTrinhCode());
+                if (duLieuTienTrinhDTO.isPresent()) tienTrinhDetailDTO.setDuLieuTienTrinh(duLieuTienTrinhDTO.get());
+            }
+        );
+        return quyTrinhDetailDTO;
+
+    }
+
+    /**
+     * Get one quyTrinhDonVi by coQuanHanhChinhCode.
+     *
+     * @param quyTrinhDonViId, tienTrinhCode the coQuanHanhChinhCode of the entity
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public QuyTrinhDetailDTO findByquyTrinhDonViId_tienTrinhCode(Long quyTrinhDonViId, String tienTrinhCode) {
+        log.debug("Request to get DuLieuTienTrinhsDetail : {}", quyTrinhDonViId);
+
+        QuyTrinhDetailDTO quyTrinhDetailDTO = quanLyQuyTrinhServiceClient.getQuyTrinhsDetail(quyTrinhDonViId);
+        List<TienTrinhDetailDTO> tienTrinhDetailDTOList = new ArrayList<>();
+        TienTrinhDetailDTO tienTrinhDetailDTO = quyTrinhDetailDTO.getTienTrinhXuLys()
+            .stream().filter(
+                tienTrinhDetail -> tienTrinhDetail.getTienTrinhBatDau().getTienTrinhCode().equals(tienTrinhCode)
+            ).findFirst().get();
+
+        Optional<DuLieuTienTrinhDTO> duLieuTienTrinhDTO =
+            duLieuTienTrinhService.findByTienTrinhCodeAndQuyTrinhDonVi_Id(quyTrinhDonViId, tienTrinhCode);
+        if (duLieuTienTrinhDTO.isPresent()) tienTrinhDetailDTO.setDuLieuTienTrinh(duLieuTienTrinhDTO.get());
+
+        tienTrinhDetailDTOList.add(tienTrinhDetailDTO);
+        quyTrinhDetailDTO.setTienTrinhXuLys(tienTrinhDetailDTOList);
+
+        return quyTrinhDetailDTO;
+
     }
 }

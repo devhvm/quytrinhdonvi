@@ -42,6 +42,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="note" type="varchar(255)">
                 <constraints nullable="false" />
             </column>

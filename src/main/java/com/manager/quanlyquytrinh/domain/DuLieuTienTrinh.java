@@ -49,6 +49,10 @@ public class DuLieuTienTrinh implements Serializable {
     private String name;
 
     @NotNull
+    @Column(name = "status", nullable = false)
+    private String status;
+
+    @NotNull
     @Column(name = "note", nullable = false)
     private String note;
 
@@ -133,6 +137,19 @@ public class DuLieuTienTrinh implements Serializable {
         this.name = name;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public DuLieuTienTrinh status(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getNote() {
         return note;
     }
@@ -214,6 +231,7 @@ public class DuLieuTienTrinh implements Serializable {
             ", fromUserId='" + getFromUserId() + "'" +
             ", toUserId='" + getToUserId() + "'" +
             ", name='" + getName() + "'" +
+            ", status='" + getStatus() + "'" +
             ", note='" + getNote() + "'" +
             "}";
     }

@@ -1,5 +1,10 @@
 package com.manager.quanlyquytrinh.web.rest;
+import com.manager.quanlyquytrinh.domain.QuyTrinhDonVi;
 import com.manager.quanlyquytrinh.service.DuLieuTienTrinhService;
+import com.manager.quanlyquytrinh.service.QuyTrinhDonViService;
+import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDetailDTO;
+import com.manager.quanlyquytrinh.service.dto.QuyTrinhDonViDTO;
+import com.manager.quanlyquytrinh.service.dto.quanlyquytrinh.QuyTrinhDetailDTO;
 import com.manager.quanlyquytrinh.web.rest.errors.BadRequestAlertException;
 import com.manager.quanlyquytrinh.web.rest.util.HeaderUtil;
 import com.manager.quanlyquytrinh.web.rest.util.PaginationUtil;
@@ -34,8 +39,11 @@ public class DuLieuTienTrinhResource {
 
     private final DuLieuTienTrinhService duLieuTienTrinhService;
 
-    public DuLieuTienTrinhResource(DuLieuTienTrinhService duLieuTienTrinhService) {
+    private final QuyTrinhDonViService quyTrinhDonViService;
+
+    public DuLieuTienTrinhResource(DuLieuTienTrinhService duLieuTienTrinhService, QuyTrinhDonViService quyTrinhDonViService) {
         this.duLieuTienTrinhService = duLieuTienTrinhService;
+        this.quyTrinhDonViService = quyTrinhDonViService;
     }
 
     /**
@@ -116,5 +124,32 @@ public class DuLieuTienTrinhResource {
         log.debug("REST request to delete DuLieuTienTrinh : {}", id);
         duLieuTienTrinhService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /du-lieu-tien-trinhs detail: get all the duLieuTienTrinhs.
+     *
+     * @param coQuanHanhChinhCode the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of duLieuTienTrinhs in body
+     */
+    @GetMapping("/du-lieu-tien-trinhs-detail/{coQuanHanhChinhCode}")
+    public ResponseEntity<QuyTrinhDetailDTO> getDuLieuTienTrinhsDetail(@PathVariable String coQuanHanhChinhCode) {
+        log.debug("REST request to get a page of DuLieuTienTrinhsDetail");
+        QuyTrinhDetailDTO quyTrinhDetailDTO = quyTrinhDonViService.findByCoQuanHanhChinh_CoQuanHanhChinhCode(coQuanHanhChinhCode);
+        return ResponseEntity.ok().body(quyTrinhDetailDTO);
+    }
+
+
+    /**
+     * GET  /du-lieu-tien-trinhs detail: get all the duLieuTienTrinhs.
+     *
+     * @param quyTrinhDonViId, tienTrinhCode the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of duLieuTienTrinhs in body
+     */
+    @GetMapping("/du-lieu-tien-trinhs-detail/{quyTrinhDonViId}/{tienTrinhCode}")
+    public ResponseEntity<QuyTrinhDetailDTO> getDuLieuTienTrinhsDetailBy(@PathVariable Long quyTrinhDonViId, String tienTrinhCode) {
+        log.debug("REST request to get a page of DuLieuTienTrinhsDetail");
+        QuyTrinhDetailDTO quyTrinhDetailDTO = quyTrinhDonViService.findByquyTrinhDonViId_tienTrinhCode(quyTrinhDonViId, tienTrinhCode);
+        return ResponseEntity.ok().body(quyTrinhDetailDTO);
     }
 }

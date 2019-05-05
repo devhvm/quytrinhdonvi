@@ -37,6 +37,13 @@
             ]
         },
         {
+            "fieldName": "status",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "note",
             "fieldType": "String",
             "fieldValidateRules": [
