@@ -156,7 +156,7 @@ public class DuLieuTienTrinhResource {
      * @return the ResponseEntity with status 200 (OK) and the list of duLieuTienTrinhs in body
      */
     @GetMapping("/du-lieu-tien-trinhs-detail/{quyTrinhDonViId}/{tienTrinhCode}")
-    public ResponseEntity<QuyTrinhDetailDTO> getDuLieuTienTrinhsDetailBy(@PathVariable Long quyTrinhDonViId, String tienTrinhCode) {
+    public ResponseEntity<QuyTrinhDetailDTO> getDuLieuTienTrinhsDetailBy(@PathVariable Long quyTrinhDonViId,@PathVariable String tienTrinhCode) {
         log.debug("REST request to get a page of DuLieuTienTrinhsDetail");
         QuyTrinhDetailDTO quyTrinhDetailDTO = quyTrinhDonViService.findByquyTrinhDonViId_tienTrinhCode(quyTrinhDonViId, tienTrinhCode);
         return ResponseEntity.ok().body(quyTrinhDetailDTO);
