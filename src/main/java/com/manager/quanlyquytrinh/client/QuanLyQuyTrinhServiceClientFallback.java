@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuanLyQuyTrinhServiceClientFallback implements QuanLyQuyTrinhServiceClient {
     @Override
-    public QuyTrinhDetailDTO getQuyTrinhsDetail(Long id) throws RuntimeException {
+    public QuyTrinhDetailDTO getQuyTrinhsDetail(String quyTrinhCode) throws RuntimeException {
         return null;
     }
 }

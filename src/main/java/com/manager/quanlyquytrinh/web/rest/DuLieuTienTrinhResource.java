@@ -1,12 +1,8 @@
 package com.manager.quanlyquytrinh.web.rest;
-import com.manager.quanlyquytrinh.domain.QuyTrinhDonVi;
 import com.manager.quanlyquytrinh.service.DuLieuTienTrinhService;
 import com.manager.quanlyquytrinh.service.QuyTrinhDonViService;
-import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDetailDTO;
-import com.manager.quanlyquytrinh.service.dto.QuyTrinhDonViDTO;
 import com.manager.quanlyquytrinh.service.dto.quanlyquytrinh.QuyTrinhDetailDTO;
 import com.manager.quanlyquytrinh.web.rest.errors.BadRequestAlertException;
-import com.manager.quanlyquytrinh.web.rest.errors.InternalServerErrorException;
 import com.manager.quanlyquytrinh.web.rest.util.HeaderUtil;
 import com.manager.quanlyquytrinh.web.rest.util.PaginationUtil;
 import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
@@ -16,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,10 +55,6 @@ public class DuLieuTienTrinhResource {
         if (duLieuTienTrinhDTO.getId() != null) {
             throw new BadRequestAlertException("A new duLieuTienTrinh cannot already have an ID", ENTITY_NAME, "idexists");
         }
-
-        if (duLieuTienTrinhService.capNhatQuyTrinh(duLieuTienTrinhDTO) == null)
-            throw new InternalServerErrorException("tạo quy trình không thành công");
-
         DuLieuTienTrinhDTO result = duLieuTienTrinhService.save(duLieuTienTrinhDTO);
         return ResponseEntity.created(new URI("/api/du-lieu-tien-trinhs/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -85,10 +76,6 @@ public class DuLieuTienTrinhResource {
         if (duLieuTienTrinhDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-
-        if (duLieuTienTrinhService.capNhatQuyTrinh(duLieuTienTrinhDTO) == null)
-            throw new InternalServerErrorException("cập nhật quy trình không thành công");
-
         DuLieuTienTrinhDTO result = duLieuTienTrinhService.save(duLieuTienTrinhDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, duLieuTienTrinhDTO.getId().toString()))
@@ -160,5 +147,49 @@ public class DuLieuTienTrinhResource {
         log.debug("REST request to get a page of DuLieuTienTrinhsDetail");
         QuyTrinhDetailDTO quyTrinhDetailDTO = quyTrinhDonViService.findByquyTrinhDonViId_tienTrinhCode(quyTrinhDonViId, tienTrinhCode);
         return ResponseEntity.ok().body(quyTrinhDetailDTO);
+    }
+
+
+    /**
+     * POST  /du-lieu-tien-trinhs : Create a new duLieuTienTrinh.
+     *
+     * @param duLieuTienTrinhDTO the duLieuTienTrinhDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new duLieuTienTrinhDTO, or with status 400 (Bad Request) if the duLieuTienTrinh has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/register-du-lieu-tien-trinhs")
+    public ResponseEntity<DuLieuTienTrinhDTO> registerDuLieuTienTrinh(@Valid @RequestBody DuLieuTienTrinhDTO duLieuTienTrinhDTO) throws URISyntaxException {
+        log.debug("REST request to save DuLieuTienTrinh : {}", duLieuTienTrinhDTO);
+        if (duLieuTienTrinhDTO.getId() != null) {
+            throw new BadRequestAlertException("A new duLieuTienTrinh cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+
+        DuLieuTienTrinhDTO result = duLieuTienTrinhService.register(duLieuTienTrinhDTO);
+
+        return ResponseEntity.created(new URI("/api/tao-du-lieu-tien-trinhs/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * PUT  /du-lieu-tien-trinhs : Updates an existing duLieuTienTrinh.
+     *
+     * @param duLieuTienTrinhDTO the duLieuTienTrinhDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated duLieuTienTrinhDTO,
+     * or with status 400 (Bad Request) if the duLieuTienTrinhDTO is not valid,
+     * or with status 500 (Internal Server Error) if the duLieuTienTrinhDTO couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PutMapping("/update-du-lieu-tien-trinhs")
+    public ResponseEntity<DuLieuTienTrinhDTO> update(@Valid @RequestBody DuLieuTienTrinhDTO duLieuTienTrinhDTO) throws URISyntaxException {
+        log.debug("REST request to update DuLieuTienTrinh : {}", duLieuTienTrinhDTO);
+        if (duLieuTienTrinhDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        DuLieuTienTrinhDTO result = duLieuTienTrinhService.update(duLieuTienTrinhDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, duLieuTienTrinhDTO.getId().toString()))
+            .body(result);
     }
 }
