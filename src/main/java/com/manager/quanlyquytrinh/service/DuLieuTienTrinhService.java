@@ -5,6 +5,7 @@ import com.manager.quanlyquytrinh.domain.DuLieuTienTrinh;
 import com.manager.quanlyquytrinh.repository.DuLieuTienTrinhRepository;
 import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
 import com.manager.quanlyquytrinh.service.mapper.DuLieuTienTrinhMapper;
+import com.manager.quanlyquytrinh.web.rest.errors.InternalServerErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -114,13 +115,49 @@ public class DuLieuTienTrinhService {
     }
 
     /**
+     * Call API to tao quy trinh.
+     *
+     * @param duLieuTienTrinhDTO the id of the entity
+     * @return the entity
+     */
+    @Transactional()
+    public DuLieuTienTrinhDTO register(DuLieuTienTrinhDTO duLieuTienTrinhDTO) {
+        DuLieuTienTrinhDTO result = save(duLieuTienTrinhDTO);
+        log.debug("Call API to cap nhat quy trinh : {}", result);
+        if (donViPhatHanhServiceClient.capNhatQuyTrinh(duLieuTienTrinhDTO.getDuLieuCode(), result) == null)
+            throw new InternalServerErrorException("tạo quy trình không thành công");
+        return result;
+    }
+
+    /**
      * Call API to cap nhat quy trinh.
      *
      * @param duLieuTienTrinhDTO the id of the entity
      * @return the entity
      */
-    public DuLieuTienTrinhDTO capNhatQuyTrinh(DuLieuTienTrinhDTO duLieuTienTrinhDTO) {
+    @Transactional()
+    public DuLieuTienTrinhDTO update(DuLieuTienTrinhDTO duLieuTienTrinhDTO) {
         log.debug("Call API to cap nhat quy trinh : {}", duLieuTienTrinhDTO);
-        return donViPhatHanhServiceClient.capNhatQuyTrinh(duLieuTienTrinhDTO.getDuLieuCode(), duLieuTienTrinhDTO);
+        if (donViPhatHanhServiceClient.capNhatQuyTrinh(duLieuTienTrinhDTO.getDuLieuCode(), duLieuTienTrinhDTO) == null)
+            throw new InternalServerErrorException("cập nhật quy trình không thành công");
+        DuLieuTienTrinh duLieuTienTrinh = duLieuTienTrinhRepository.save(toEntity(duLieuTienTrinhDTO));
+        return duLieuTienTrinhMapper.toDto(duLieuTienTrinh);
+    }
+
+    /**
+     * Save a duLieuTienTrinh.
+     *
+     * @param duLieuTienTrinhDTO the entity to save
+     * @return the persisted entity
+     */
+    private DuLieuTienTrinh toEntity(DuLieuTienTrinhDTO duLieuTienTrinhDTO) {
+        log.debug("Request to cap nhat DuLieuTienTrinh : {}", duLieuTienTrinhDTO);
+        DuLieuTienTrinh duLieuTienTrinh = new DuLieuTienTrinh();
+        duLieuTienTrinh.setTienTrinhCode(duLieuTienTrinhDTO.getTienTrinhCode());
+        duLieuTienTrinh.setStatus(duLieuTienTrinhDTO.getStatus());
+        duLieuTienTrinh.setFromUserId(duLieuTienTrinhDTO.getFromUserId());
+        duLieuTienTrinh.setToUserId(duLieuTienTrinhDTO.getToUserId());
+        duLieuTienTrinh.setNote(duLieuTienTrinhDTO.getNote());
+        return duLieuTienTrinh;
     }
 }

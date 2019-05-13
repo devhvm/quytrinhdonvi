@@ -1,7 +1,5 @@
 package com.manager.quanlyquytrinh.service.dto.quanlyquytrinh;
 
-import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
-
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
  */
 public class QuyTrinhDetailDTO implements Serializable {
 
-    private Long id;
+    private Long quyTrinhDonViId;
 
     @NotNull
     private String quyTrinhCode;
@@ -27,12 +25,12 @@ public class QuyTrinhDetailDTO implements Serializable {
 
     private List<TienTrinhDetailDTO> tienTrinhXuLys;
 
-    public Long getId() {
-        return id;
+    public Long getQuyTrinhDonViId() {
+        return quyTrinhDonViId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setQuyTrinhDonViId(Long quyTrinhDonViId) {
+        this.quyTrinhDonViId = quyTrinhDonViId;
     }
 
     public String getQuyTrinhCode() {

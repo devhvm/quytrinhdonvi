@@ -109,7 +109,8 @@ public class QuyTrinhDonViService {
         Optional<QuyTrinhDonViDTO> quyTrinhDonViDTO = quyTrinhDonViRepository.
             findByCoQuanHanhChinh_CoQuanHanhChinhCode(coQuanHanhChinhCode).map(quyTrinhDonViMapper::toDto);
 
-        QuyTrinhDetailDTO quyTrinhDetailDTO = quanLyQuyTrinhServiceClient.getQuyTrinhsDetail(quyTrinhDonViDTO.get().getId());
+        QuyTrinhDetailDTO quyTrinhDetailDTO = quanLyQuyTrinhServiceClient.getQuyTrinhsDetail(quyTrinhDonViDTO.get().getQuyTrinhCode());
+        quyTrinhDetailDTO.setQuyTrinhDonViId(quyTrinhDonViDTO.get().getId());
         List<TienTrinhDetailDTO> tienTrinhDetailDTOList = quyTrinhDetailDTO.getTienTrinhXuLys();
         tienTrinhDetailDTOList.forEach(
             tienTrinhDetailDTO -> {
@@ -132,7 +133,10 @@ public class QuyTrinhDonViService {
     public QuyTrinhDetailDTO findByquyTrinhDonViId_tienTrinhCode(Long quyTrinhDonViId, String tienTrinhCode) {
         log.debug("Request to get DuLieuTienTrinhsDetail : {}", quyTrinhDonViId);
 
-        QuyTrinhDetailDTO quyTrinhDetailDTO = quanLyQuyTrinhServiceClient.getQuyTrinhsDetail(quyTrinhDonViId);
+        Optional<QuyTrinhDonViDTO> quyTrinhDonViDTO = quyTrinhDonViRepository.findById(quyTrinhDonViId).map(quyTrinhDonViMapper::toDto);
+
+        QuyTrinhDetailDTO quyTrinhDetailDTO = quanLyQuyTrinhServiceClient.getQuyTrinhsDetail(quyTrinhDonViDTO.get().getQuyTrinhCode());
+        quyTrinhDetailDTO.setQuyTrinhDonViId(quyTrinhDonViId);
         List<TienTrinhDetailDTO> tienTrinhDetailDTOList = new ArrayList<>();
         TienTrinhDetailDTO tienTrinhDetailDTO = quyTrinhDetailDTO.getTienTrinhXuLys()
             .stream().filter(

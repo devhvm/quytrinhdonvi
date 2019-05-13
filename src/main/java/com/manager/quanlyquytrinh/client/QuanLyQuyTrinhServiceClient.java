@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "quanlyquytrinh", qualifier = "quanlyquytrinh", url = "${snv.gateway.quanlyquytrinh:}", path = "api", fallback = QuanLyQuyTrinhServiceClientFallback.class)
 public interface QuanLyQuyTrinhServiceClient {
 
-    @GetMapping("/quy-trinhs-detail/{id}")
-    QuyTrinhDetailDTO getQuyTrinhsDetail(@RequestParam("id") Long id) throws RuntimeException;
+    @GetMapping("/quy-trinhs-detail/{quyTrinhCode}")
+    QuyTrinhDetailDTO getQuyTrinhsDetail(@RequestParam("quyTrinhCode") String quyTrinhCode) throws RuntimeException;
 }
