@@ -5,6 +5,7 @@ import com.manager.quanlyquytrinh.domain.DuLieuTienTrinh;
 import com.manager.quanlyquytrinh.repository.DuLieuTienTrinhRepository;
 import com.manager.quanlyquytrinh.service.dto.DuLieuTienTrinhDTO;
 import com.manager.quanlyquytrinh.service.mapper.DuLieuTienTrinhMapper;
+import com.manager.quanlyquytrinh.service.mapper.QuyTrinhDonViMapper;
 import com.manager.quanlyquytrinh.web.rest.errors.InternalServerErrorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +38,12 @@ public class DuLieuTienTrinhService {
 
     private final DuLieuTienTrinhMapper duLieuTienTrinhMapper;
 
-    public DuLieuTienTrinhService(DuLieuTienTrinhRepository duLieuTienTrinhRepository, DuLieuTienTrinhMapper duLieuTienTrinhMapper) {
+    private final QuyTrinhDonViMapper quyTrinhDonViMapper;
+
+    public DuLieuTienTrinhService(DuLieuTienTrinhRepository duLieuTienTrinhRepository, DuLieuTienTrinhMapper duLieuTienTrinhMapper, QuyTrinhDonViMapper quyTrinhDonViMapper) {
         this.duLieuTienTrinhRepository = duLieuTienTrinhRepository;
         this.duLieuTienTrinhMapper = duLieuTienTrinhMapper;
+        this.quyTrinhDonViMapper = quyTrinhDonViMapper;
     }
 
     /**
@@ -153,11 +157,15 @@ public class DuLieuTienTrinhService {
     private DuLieuTienTrinh toEntity(DuLieuTienTrinhDTO duLieuTienTrinhDTO) {
         log.debug("Request to cap nhat DuLieuTienTrinh : {}", duLieuTienTrinhDTO);
         DuLieuTienTrinh duLieuTienTrinh = new DuLieuTienTrinh();
+        duLieuTienTrinh.setId( duLieuTienTrinhDTO.getId());
+        duLieuTienTrinh.setDuLieuCode(duLieuTienTrinhDTO.getDuLieuCode());
         duLieuTienTrinh.setTienTrinhCode(duLieuTienTrinhDTO.getTienTrinhCode());
         duLieuTienTrinh.setStatus(duLieuTienTrinhDTO.getStatus());
         duLieuTienTrinh.setFromUserId(duLieuTienTrinhDTO.getFromUserId());
         duLieuTienTrinh.setToUserId(duLieuTienTrinhDTO.getToUserId());
         duLieuTienTrinh.setNote(duLieuTienTrinhDTO.getNote());
+        duLieuTienTrinh.setName(duLieuTienTrinhDTO.getName());
+        duLieuTienTrinh.setQuyTrinhDonVi( quyTrinhDonViMapper.fromId( duLieuTienTrinhDTO.getQuyTrinhDonViId() ) );
         return duLieuTienTrinh;
     }
 }
