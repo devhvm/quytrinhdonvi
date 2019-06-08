@@ -148,8 +148,8 @@ public class DuLieuTienTrinhDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", status='" + getStatus() + "'" +
             ", note='" + getNote() + "'" +
-            ", quyTrinhDonVi=" + getQuyTrinhDonViId() +
-            ", quyTrinhDonVi='" + getQuyTrinhDonViName() + "'" +
+            ", quyTrinhDonViId=" + getQuyTrinhDonViId() +
+            ", quyTrinhDonViName='" + getQuyTrinhDonViName() + "'" +
             "}";
     }
 }
